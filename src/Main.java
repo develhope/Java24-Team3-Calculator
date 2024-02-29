@@ -5,6 +5,7 @@ import static java.lang.Double.valueOf;
 
 public class Main {
     public static void main(String[] args) {
+
         while (true) {
             String[] operazioni = {"1) Somma (+)",
                     "2) Sottrazione (-)",

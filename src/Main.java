@@ -1,12 +1,10 @@
-import java.io.Console;
 import java.util.Scanner;
 import static java.lang.Double.NaN;
-import static java.lang.Double.valueOf;
 
 public class Main {
     public static void main(String[] args) {
-        double ultimoRisultato = 0;
-        int selezioneMenu = -1;
+        double ultimoRisultato;
+        int selezioneMenu;
 
         while (true) {
             String[] operazioni = {"1) SOMMA (+)",
@@ -22,7 +20,7 @@ public class Main {
                 System.out.println(operazione);
             }
 
-            selezioneMenu = richiediInput();
+            selezioneMenu = (int) richiediInput();
 
             double[] inputOperazioni = {0, 0};
 
@@ -32,58 +30,59 @@ public class Main {
                     System.exit(0);
 
                 case 1:
-                    System.out.println("SOMMA\nInserisci il primo addendo:");
+                    System.out.print("SOMMA\nInserisci il primo addendo: ");
                     inputOperazioni[0] = richiediInput();
-                    System.out.print("Inserisci il secondo addendo:\n" + inputOperazioni[0] + " + ");
+                    System.out.print("\nInserisci il secondo addendo: ");
                     inputOperazioni[1] = richiediInput();
                     ultimoRisultato = somma(inputOperazioni[0], inputOperazioni[1]);
-                    System.out.println(" = " + ultimoRisultato);
+                    System.out.println(inputOperazioni[0] + " + " + inputOperazioni[1] + " = " + ultimoRisultato);
                     break;
 
                 case 2:
-                    System.out.println("SOTTRAZIONE\nInserisci il minuendo:");
+                    System.out.print("SOTTRAZIONE\nInserisci il minuendo: ");
                     inputOperazioni[0] = richiediInput();
-                    System.out.print("Inserisci il sottraendo:\n" + inputOperazioni[0] + " - ");
+                    System.out.print("Inserisci il sottraendo: ");
                     inputOperazioni[1] = richiediInput();
                     ultimoRisultato = sottrazione(inputOperazioni[0], inputOperazioni[1]);
-                    System.out.println(" = " + ultimoRisultato);
+                    System.out.println(inputOperazioni[0] + " - " + inputOperazioni[1] + " = " + ultimoRisultato);
                     break;
 
                 case 3:
-                    System.out.println("MOLTIPLICAZIONE\nInserisci il primo fattore:");
+                    System.out.print("MOLTIPLICAZIONE\nInserisci il primo fattore: ");
                     inputOperazioni[0] = richiediInput();
-                    System.out.print("Inserisci il secondo fattore:\n" + inputOperazioni[0] + " * ");
+                    System.out.print("Inserisci il secondo fattore: ");
                     inputOperazioni[1] = richiediInput();
                     ultimoRisultato = moltiplicazione(inputOperazioni[0], inputOperazioni[1]);
-                    System.out.println(" = " + ultimoRisultato);
+                    System.out.println(inputOperazioni[0] + " * " + inputOperazioni[1] + " = " + ultimoRisultato);
                     break;
 
                 case 4:
-                    System.out.println("DIVISIONE\nInserisci il primo dividendo:");
+                    System.out.print("DIVISIONE\nInserisci il dividendo: ");
                     inputOperazioni[0] = richiediInput();
-                    System.out.print("Inserisci il divisore:\n" + inputOperazioni[0] + " / ");
+                    System.out.print("Inserisci il divisore: ");
                     inputOperazioni[1] = richiediInput();
                     ultimoRisultato = divisione(inputOperazioni[0], inputOperazioni[1])[0];
-                    System.out.println(" = " + ultimoRisultato + " con resto di " + divisione(inputOperazioni[0], inputOperazioni[1])[1]);
-                    break;
+                    System.out.println(inputOperazioni[0] + " + " + inputOperazioni[1] + " = " + ultimoRisultato + " con resto " + divisione(inputOperazioni[0], inputOperazioni[1])[1]);
 
+                /*
                 case 5:
-                    System.out.println("POTENZA\nInserisci la base:");
+                    System.out.print("POTENZA\nInserisci la base: ");
                     inputOperazioni[0] = richiediInput();
-                    System.out.print("Inserisci l'esponente:\n" + inputOperazioni[0] + " ^ ");
+                    System.out.print("Inserisci l'esponente: ");
                     inputOperazioni[1] = richiediInput();
                     ultimoRisultato = potenza(inputOperazioni[0], inputOperazioni[1]);
-                    System.out.println(" = " + ultimoRisultato);
+                    System.out.println(inputOperazioni[0] + " ^ " + inputOperazioni[1] + " = " + ultimoRisultato);
                     break;
+                */
 
                 case 6:
-                    System.out.println("PARI O DISPARI\nInserisci un numero:");
+                    System.out.print("PARI O DISPARI\nInserisci un numero: ");
                     inputOperazioni[0] = richiediInput();
                     System.out.println(determinaPariODispari(inputOperazioni[0]));
                     break;
 
                 default:
-                    System.out.println("RESET");
+                    System.out.println("Valore non valido, riprova.");
                     main(args);
                     break;
             }
@@ -126,5 +125,22 @@ public class Main {
 
     public static double moltiplicazione(double num1, double num2) {
         return num1 * num2;
+    }
+
+    public static double richiediInput () {
+        double input = -1;
+        boolean correctInput = false;
+
+        while (!correctInput) {
+            try {
+                Scanner scanner = new Scanner(System.in);
+                input = scanner.nextDouble();
+                correctInput = true;
+            } catch (Exception e) {
+                System.out.println("Valore non valido, riprova.");
+            }
+        }
+
+        return input;
     }
 }

@@ -64,7 +64,6 @@ public class Main {
                     ultimoRisultato = divisione(inputOperazioni[0], inputOperazioni[1])[0];
                     System.out.println(inputOperazioni[0] + " + " + inputOperazioni[1] + " = " + ultimoRisultato + " con resto " + divisione(inputOperazioni[0], inputOperazioni[1])[1]);
 
-                /*
                 case 5:
                     System.out.print("POTENZA\nInserisci la base: ");
                     inputOperazioni[0] = richiediInput();
@@ -73,7 +72,6 @@ public class Main {
                     ultimoRisultato = potenza(inputOperazioni[0], inputOperazioni[1]);
                     System.out.println(inputOperazioni[0] + " ^ " + inputOperazioni[1] + " = " + ultimoRisultato);
                     break;
-                */
 
                 case 6:
                     System.out.print("PARI O DISPARI\nInserisci un numero: ");
@@ -143,4 +141,36 @@ public class Main {
 
         return input;
     }
+  
+  public static double potenza (double base, int esponente) {
+        if (base == 0) {
+            if (esponente == 0) {
+                System.out.println("0 elevato a 0 non avrebbe senso, ma restituisco 0.");
+            }
+            return 0;
+        } else {
+            if (esponente == 0) {
+                return 1;
+            } else {
+                if (base == 1) {
+                    return 1;
+                } else {
+                    double risultato = base;
+
+                    if (esponente > 0) {
+                        for (int i = 1; i < esponente; i++) {
+                                risultato *= base;
+                        }
+
+                        return risultato;
+                    } else {
+                        for (int i = -1; i > esponente; i--) {
+                            risultato *= base;
+                        }
+
+                        return 1 / risultato;
+                    }
+                }
+            }
+        }
 }

@@ -3,7 +3,7 @@ import static java.lang.Double.NaN;
 
 public class Main {
     public static void main(String[] args) {
-        double ultimoRisultato;
+        double[] ultimoRisultato = {0, 0};
         int selezioneMenu;
 
         while (true) {
@@ -32,10 +32,10 @@ public class Main {
                 case 1:
                     System.out.print("SOMMA\nInserisci il primo addendo: ");
                     inputOperazioni[0] = richiediInput();
-                    System.out.print("\nInserisci il secondo addendo: ");
+                    System.out.print("Inserisci il secondo addendo: ");
                     inputOperazioni[1] = richiediInput();
-                    ultimoRisultato = somma(inputOperazioni[0], inputOperazioni[1]);
-                    System.out.println(inputOperazioni[0] + " + " + inputOperazioni[1] + " = " + ultimoRisultato);
+                    ultimoRisultato[0] = somma(inputOperazioni[0], inputOperazioni[1]);
+                    System.out.println(inputOperazioni[0] + " + " + inputOperazioni[1] + " = " + ultimoRisultato[0]);
                     break;
 
                 case 2:
@@ -43,8 +43,8 @@ public class Main {
                     inputOperazioni[0] = richiediInput();
                     System.out.print("Inserisci il sottraendo: ");
                     inputOperazioni[1] = richiediInput();
-                    ultimoRisultato = sottrazione(inputOperazioni[0], inputOperazioni[1]);
-                    System.out.println(inputOperazioni[0] + " - " + inputOperazioni[1] + " = " + ultimoRisultato);
+                    ultimoRisultato[0] = sottrazione(inputOperazioni[0], inputOperazioni[1]);
+                    System.out.println(inputOperazioni[0] + " - " + inputOperazioni[1] + " = " + ultimoRisultato[0]);
                     break;
 
                 case 3:
@@ -52,8 +52,8 @@ public class Main {
                     inputOperazioni[0] = richiediInput();
                     System.out.print("Inserisci il secondo fattore: ");
                     inputOperazioni[1] = richiediInput();
-                    ultimoRisultato = moltiplicazione(inputOperazioni[0], inputOperazioni[1]);
-                    System.out.println(inputOperazioni[0] + " * " + inputOperazioni[1] + " = " + ultimoRisultato);
+                    ultimoRisultato[0] = moltiplicazione(inputOperazioni[0], inputOperazioni[1]);
+                    System.out.println(inputOperazioni[0] + " * " + inputOperazioni[1] + " = " + ultimoRisultato[0]);
                     break;
 
                 case 4:
@@ -61,19 +61,18 @@ public class Main {
                     inputOperazioni[0] = richiediInput();
                     System.out.print("Inserisci il divisore: ");
                     inputOperazioni[1] = richiediInput();
-                    ultimoRisultato = divisione(inputOperazioni[0], inputOperazioni[1])[0];
-                    System.out.println(inputOperazioni[0] + " + " + inputOperazioni[1] + " = " + ultimoRisultato + " con resto " + divisione(inputOperazioni[0], inputOperazioni[1])[1]);
+                    ultimoRisultato[0] = divisione(inputOperazioni[0], inputOperazioni[1])[0];
+                    System.out.println(inputOperazioni[0] + " / " + inputOperazioni[1] + " = " + ultimoRisultato[0] + " con resto " + ultimoRisultato[1]);
+                    break;
 
-                /*
                 case 5:
                     System.out.print("POTENZA\nInserisci la base: ");
                     inputOperazioni[0] = richiediInput();
                     System.out.print("Inserisci l'esponente: ");
                     inputOperazioni[1] = richiediInput();
-                    ultimoRisultato = potenza(inputOperazioni[0], inputOperazioni[1]);
-                    System.out.println(inputOperazioni[0] + " ^ " + inputOperazioni[1] + " = " + ultimoRisultato);
+                    ultimoRisultato[0] = potenza(inputOperazioni[0], (int) inputOperazioni[1]);
+                    System.out.println(inputOperazioni[0] + " ^ " + inputOperazioni[1] + " = " + ultimoRisultato[0]);
                     break;
-                */
 
                 case 6:
                     System.out.print("PARI O DISPARI\nInserisci un numero: ");
@@ -89,10 +88,11 @@ public class Main {
         }
     }
 
-    /*divide due numeri dati come input e restituisce il quoziente e il resto.
-      In caso il secondo numero inserito sia zero, restituisce NaN.
-     */
     public static double[] divisione(double num1, double num2) {
+        /*
+        divide due numeri dati come input e restituisce il quoziente e il resto.
+        In caso il secondo numero inserito sia zero, restituisce NaN.
+        */
         double[] result = new double[2];
         if (num2 != 0) {
             result[0] = num1 / num2;
@@ -127,7 +127,41 @@ public class Main {
         return num1 * num2;
     }
 
+    public static double potenza (double base, int esponente) {
+        if (base == 0) {
+            if (esponente == 0) {
+                System.out.println("0 elevato a 0 non avrebbe senso, ma restituisco 0.");
+            }
+            return 0;
+        } else {
+            if (esponente == 0) {
+                return 1;
+            } else {
+                if (base == 1) {
+                    return 1;
+                } else {
+                    double risultato = base;
+
+                    if (esponente > 0) {
+                        for (int i = 1; i < esponente; i++) {
+                            risultato *= base;
+                        }
+
+                        return risultato;
+                    } else {
+                        for (int i = -1; i > esponente; i--) {
+                            risultato *= base;
+                        }
+
+                        return 1 / risultato;
+                    }
+                }
+            }
+        }
+    }
+
     public static double richiediInput () {
+        // IL METODO CONSIDERA CORRETTI NUMERI CON LA VIRGOLA, NON CON IL PUNTO
         double input = -1;
         boolean correctInput = false;
 

@@ -161,7 +161,9 @@ public class Main {
     }
 
     public static double richiediInput () {
-        // IL METODO CONSIDERA CORRETTI NUMERI CON LA VIRGOLA, NON CON IL PUNTO
+        // A causa della localizzazione (non so se di IntelliJ o del sistema operativo
+        // vengono considerati valori corretti i numeri scritti utilizzando la virgola (esempio: 2,13)
+        // mentre sono errati quelli con il punto (esempio: 2.13)
         double input = -1;
         boolean correctInput = false;
 

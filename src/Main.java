@@ -109,11 +109,24 @@ public class Main {
     // che passo alla funzione in stringa, dopodichè la funzione prende l'ultimo carattere di
     //questa stringa che verrà riconvertito in numero.
     public static String determinaPariODispari(double num1) {
-        if (Character.getNumericValue((Double.toString(num1)).charAt(Double.toString(num1).length() - 1)) % 2 == 0) {
-            return "Pari";
+
+        //se il numero è intero, determina se è pari o dispari con l'operazione del resto diviso 2
+        if (num1 == (int) num1) {
+            if (num1 % 2 == 0) {
+                return "Pari";
+            } else {
+                return "Dispari";
+            }
+
         } else {
-            return "Dispari";
+
+            if (Character.getNumericValue((Double.toString(num1)).charAt(Double.toString(num1).length() - 1)) % 2 == 0) {
+                return "Pari";
+            } else {
+                return "Dispari";
+            }
         }
+
     }
 
     public static double sottrazione(double num1, double num2) {

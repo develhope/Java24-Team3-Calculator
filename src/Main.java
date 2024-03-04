@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 import static java.lang.Double.NaN;
 
 public class Main {
@@ -62,7 +63,8 @@ public class Main {
                     System.out.print("Inserisci il divisore: ");
                     inputOperazioni[1] = richiediInput();
                     ultimoRisultato = divisione(inputOperazioni[0], inputOperazioni[1])[0];
-                    System.out.println(inputOperazioni[0] + " + " + inputOperazioni[1] + " = " + ultimoRisultato + " con resto " + divisione(inputOperazioni[0], inputOperazioni[1])[1]);
+                    System.out.println(inputOperazioni[0] + " / " + inputOperazioni[1] + " = " + ultimoRisultato + " con resto " + divisione(inputOperazioni[0], inputOperazioni[1])[1]);
+                    break;
 
                 case 5:
                     System.out.print("POTENZA\nInserisci la base: ");
@@ -96,8 +98,7 @@ public class Main {
             result[0] = num1 / num2;
             result[1] = num1 % num2;
         } else {
-            result[0] = NaN;
-            result[1] = NaN;
+            System.out.println("Impossibile dividere per 0, ma restituisco 0.");
         }
         return result;
     }
@@ -106,11 +107,24 @@ public class Main {
     // che passo alla funzione in stringa, dopodichè la funzione prende l'ultimo carattere di
     //questa stringa che verrà riconvertito in numero.
     public static String determinaPariODispari(double num1) {
-        if (Character.getNumericValue((Double.toString(num1)).charAt(Double.toString(num1).length() - 1)) % 2 == 0) {
-            return "Pari";
+
+        //se il numero è intero, determina se è pari o dispari con l'operazione del resto diviso 2
+        if (num1 == (int) num1) {
+            if (num1 % 2 == 0) {
+                return "Pari";
+            } else {
+                return "Dispari";
+            }
+
         } else {
-            return "Dispari";
+
+            if (Character.getNumericValue((Double.toString(num1)).charAt(Double.toString(num1).length() - 1)) % 2 == 0) {
+                return "Pari";
+            } else {
+                return "Dispari";
+            }
         }
+
     }
 
     public static double sottrazione(double num1, double num2) {
@@ -159,7 +173,7 @@ public class Main {
 
                     if (esponente > 0) {
                         for (int i = 1; i < esponente; i++) {
-                                risultato *= base;
+                            risultato *= base;
                         }
 
                         return risultato;
@@ -173,4 +187,5 @@ public class Main {
                 }
             }
         }
+    }
 }

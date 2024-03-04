@@ -1,5 +1,6 @@
 import java.io.Console;
 import java.util.Scanner;
+
 import static java.lang.Double.NaN;
 import static java.lang.Double.valueOf;
 
@@ -99,8 +100,7 @@ public class Main {
             result[0] = num1 / num2;
             result[1] = num1 % num2;
         } else {
-            result[0] = NaN;
-            result[1] = NaN;
+            System.out.println("Impossibile dividere per 0, ma restituisco 0.");
         }
         return result;
     }
@@ -127,8 +127,8 @@ public class Main {
     public static double moltiplicazione(double num1, double num2) {
         return num1 * num2;
     }
-  
-  public static double potenza (double base, int esponente) {
+
+    public static double potenza(double base, int esponente) {
         if (base == 0) {
             if (esponente == 0) {
                 System.out.println("0 elevato a 0 non avrebbe senso, ma restituisco 0.");
@@ -145,7 +145,7 @@ public class Main {
 
                     if (esponente > 0) {
                         for (int i = 1; i < esponente; i++) {
-                                risultato *= base;
+                            risultato *= base;
                         }
 
                         return risultato;
@@ -159,4 +159,5 @@ public class Main {
                 }
             }
         }
+    }
 }

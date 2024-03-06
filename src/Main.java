@@ -13,11 +13,18 @@ public class Main {
                     "4) DIVISIONE (/)",
                     "5) POTENZA (^)",
                     "6) PARI O DISPARI (%)",
-                    "0) ESCI (termina il programma)"};
+                    "0) ESCI (termina il programma)",
+                    "Oppure inserisci qualsiasi altro valore per resettare la calcolatrice."};
 
-            System.out.println("Seleziona l'operazione che vuoi eseguire scrivendo il rispettivo numero e premendo INVIO.");
+            System.out.println("\nSeleziona l'operazione che vuoi eseguire scrivendo il rispettivo numero e premendo INVIO.\n" +
+                    "Se il risultato è diverso da 0, verrà salvato per essere utilizzato nell'operazione successiva.");
+
             for (String operazione : operazioni) {
                 System.out.println(operazione);
+            }
+
+            if (ultimoRisultato[0] != 0) {
+                System.out.println("Stai utilizzando l'ultimo risultato salvato: " + ultimoRisultato[0]);
             }
 
             selezioneMenu = (int) richiediInput();
@@ -31,8 +38,15 @@ public class Main {
 
                 case 1:
                     System.out.println("SOMMA\n" + avvisoNumeriDecimali);
-                    System.out.print("Inserisci il primo addendo: ");
-                    inputOperazioni[0] = richiediInput();
+
+                    if (ultimoRisultato[0] == 0) {
+                        System.out.print("Inserisci il primo addendo: ");
+                        inputOperazioni[0] = richiediInput();
+                    } else {
+                        System.out.println("Stai utilizzando l'ultimo risultato salvato: " + ultimoRisultato[0]);
+                        inputOperazioni[0] = ultimoRisultato[0];
+                    }
+
                     System.out.print("Inserisci il secondo addendo: ");
                     inputOperazioni[1] = richiediInput();
                     ultimoRisultato[0] = somma(inputOperazioni[0], inputOperazioni[1]);
@@ -41,8 +55,15 @@ public class Main {
 
                 case 2:
                     System.out.println("SOTTRAZIONE\n" + avvisoNumeriDecimali);
-                    System.out.print("Inserisci il minuendo: ");
-                    inputOperazioni[0] = richiediInput();
+
+                    if (ultimoRisultato[0] == 0) {
+                        System.out.print("Inserisci il minuendo: ");
+                        inputOperazioni[0] = richiediInput();
+                    } else {
+                        System.out.println("Stai utilizzando l'ultimo risultato salvato: " + ultimoRisultato[0]);
+                        inputOperazioni[0] = ultimoRisultato[0];
+                    }
+
                     System.out.print("Inserisci il sottraendo: ");
                     inputOperazioni[1] = richiediInput();
                     ultimoRisultato[0] = sottrazione(inputOperazioni[0], inputOperazioni[1]);
@@ -51,8 +72,15 @@ public class Main {
 
                 case 3:
                     System.out.println("MOLTIPLICAZIONE\n" + avvisoNumeriDecimali);
-                    System.out.print("Inserisci il primo fattore: ");
-                    inputOperazioni[0] = richiediInput();
+
+                    if (ultimoRisultato[0] == 0) {
+                        System.out.print("Inserisci il primo fattore: ");
+                        inputOperazioni[0] = richiediInput();
+                    } else {
+                        System.out.println("Stai utilizzando l'ultimo risultato salvato: " + ultimoRisultato[0]);
+                        inputOperazioni[0] = ultimoRisultato[0];
+                    }
+
                     System.out.print("Inserisci il secondo fattore: ");
                     inputOperazioni[1] = richiediInput();
                     ultimoRisultato[0] = moltiplicazione(inputOperazioni[0], inputOperazioni[1]);
@@ -61,8 +89,15 @@ public class Main {
 
                 case 4:
                     System.out.println("DIVISIONE\n" + avvisoNumeriDecimali);
-                    System.out.print("Inserisci il dividendo: ");
-                    inputOperazioni[0] = richiediInput();
+
+                    if (ultimoRisultato[0] == 0) {
+                        System.out.print("Inserisci il dividendo: ");
+                        inputOperazioni[0] = richiediInput();
+                    }  else {
+                        System.out.println("Stai utilizzando l'ultimo risultato salvato: " + ultimoRisultato[0]);
+                        inputOperazioni[0] = ultimoRisultato[0];
+                    }
+
                     System.out.print("Inserisci il divisore: ");
                     inputOperazioni[1] = richiediInput();
                     ultimoRisultato[0] = divisione(inputOperazioni[0], inputOperazioni[1])[0];
@@ -71,9 +106,16 @@ public class Main {
 
                 case 5:
                     System.out.println("POTENZA\n" + avvisoNumeriDecimali);
-                    System.out.print("Inserisci la base: ");
-                    inputOperazioni[0] = richiediInput();
-                    System.out.print("Inserisci l'esponente (l'esponente deve essere un numero intero, altrimenti verrà arrotondato per difetto all'intero più vicino: ");
+
+                    if (ultimoRisultato[0] == 0) {
+                        System.out.print("Inserisci la base: ");
+                        inputOperazioni[0] = richiediInput();
+                    } else {
+                        System.out.println("Stai utilizzando l'ultimo risultato salvato: " + ultimoRisultato[0]);
+                        inputOperazioni[0] = ultimoRisultato[0];
+                    }
+
+                    System.out.print("Inserisci l'esponente (deve essere un intero, altrimenti verrà arrotondato per difetto): ");
                     inputOperazioni[1] = richiediInput();
                     ultimoRisultato[0] = potenza(inputOperazioni[0], (int) inputOperazioni[1]);
                     System.out.println(inputOperazioni[0] + " ^ " + (int) inputOperazioni[1] + " = " + ultimoRisultato[0]);
@@ -81,13 +123,20 @@ public class Main {
 
                 case 6:
                     System.out.println("PARI O DISPARI\n" + avvisoNumeriDecimali);
-                    System.out.print("Inserisci un numero: ");
-                    inputOperazioni[0] = richiediInput();
-                    System.out.println(determinaPariODispari(inputOperazioni[0]));
+
+                    if (ultimoRisultato[0] == 0) {
+                        System.out.print("Inserisci un numero intero (un numero con la virgola verrà arrotondato per difetto): ");
+                        inputOperazioni[0] = richiediInput();
+                    } else {
+                        System.out.println("Stai utilizzando l'ultimo risultato salvato: " + ultimoRisultato[0]);
+                        inputOperazioni[0] = ultimoRisultato[0];
+                    }
+
+                    System.out.println(determinaPariODispari((int) inputOperazioni[0]));
                     break;
 
                 default:
-                    System.out.println("Valore non valido, riprova.");
+                    System.out.println("Reset");
                     main(args);
                     break;
             }
@@ -108,27 +157,14 @@ public class Main {
         return result;
     }
 
-    public static String determinaPariODispari (double num1) {
+    public static String determinaPariODispari (int num1) {
         // Se il numero è intero, lo divide per due e stabilisce se questo è pari o dispari in base al resto.
-        // Invece, in caso di numero decimale, la funzione converte il numero
-        // in una stringa e legge il suo ultimo carattere per riconvertirlo in numero intero ed effettuare il controllo.
 
-        if (num1 == (int) num1) {
-            if (num1 % 2 == 0) {
-                return "Pari";
-            } else {
-                return "Dispari";
-            }
-
+        if (num1 % 2 == 0) {
+            return "Pari";
         } else {
-
-            if (Character.getNumericValue((Double.toString(num1)).charAt(Double.toString(num1).length() - 1)) % 2 == 0) {
-                return "Pari";
-            } else {
-                return "Dispari";
-            }
+            return "Dispari";
         }
-
     }
 
     public static double sottrazione (double num1, double num2) {
